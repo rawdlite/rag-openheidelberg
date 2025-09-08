@@ -294,6 +294,19 @@ wheels = [
 ]
 
 [[package]]
+name = "couchdb2"
+version = "1.13.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "requests" },
+    { name = "tqdm" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/1a/c0/aad8f6be8b2ebd71e95454296aa2390d6beb81d5f7a0bc4b3804509f3278/CouchDB2-1.13.0.tar.gz", hash = "sha256:c77adb7e91cbda73507db5bc1b4ae323e8a27a0a90086ba5f82f740b08cf40fe", size = 33857, upload-time = "2021-11-04T15:30:21.567Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/5b/dc/1e3774fd10a919d22faf83e2918e674f0f57cd34d05626dd399eeab0e222/CouchDB2-1.13.0-py3-none-any.whl", hash = "sha256:95aa9a0ac7d7644b28654084a1ecf4316b49755e531b5f3f285cbd7c68ef8c5c", size = 24243, upload-time = "2021-11-04T15:30:19.299Z" },
+]
+
+[[package]]
 name = "cryptography"
 version = "45.0.7"
 source = { registry = "https://pypi.org/simple" }
@@ -1723,6 +1736,7 @@ name = "rag-openheidelberg"
 version = "0.1.0"
 source = { editable = "." }
 dependencies = [
+    { name = "couchdb2" },
     { name = "dagster" },
 ]
 
@@ -1733,7 +1747,10 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [{ name = "dagster", specifier = "==1.11.9" }]
+requires-dist = [
+    { name = "couchdb2", specifier = ">=1.13.0" },
+    { name = "dagster", specifier = "==1.11.9" },
+]
 
 [package.metadata.requires-dev]
 dev = [
