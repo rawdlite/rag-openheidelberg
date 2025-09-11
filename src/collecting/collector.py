@@ -1,4 +1,5 @@
 import couchdb2
+from config import Config
 
 class Collector:
 

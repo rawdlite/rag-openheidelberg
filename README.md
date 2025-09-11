@@ -7,7 +7,7 @@ Its primary goal is to support members of the OpenHeidelberg AI team in experime
 
 ### Clone the repository:
 
-```vbash
+```bash
 git clone <repo-url>
 cd <repo-name>
 ```
