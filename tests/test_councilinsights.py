@@ -9,6 +9,11 @@ class TestCounsilInsights(unittest.TestCase):
         self.assertIsInstance(insights.start_id, int)
         self.assertIsInstance(insights.end_id, int)  
         self.assertIsInstance(insights.base_url, str)
+        
+    def test_process(self):
+        insights = CounsilInsights()
+        insights.process()
+        self.assertTrue(True) 
 
 if __name__ == '__main__':
     unittest.main()

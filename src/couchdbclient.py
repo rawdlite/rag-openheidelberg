@@ -47,5 +47,10 @@ class Client:
         Returns:
             List of all documents in the database
         """
-        rows = self.db.view(designname='app', viewname='all_entries', include_docs=True)
-        return [row.doc for row in rows if not row.id.startswith('_design/')]
+        return self.db.view(designname='app', viewname='all_entries', include_docs=True)
+    
+    def get_all_unrun_docs(self) -> List[Dict[str, Any]]:
+        """
+        Fetch all documents from couchdb that are not run yet
+        """
+        return self.db.view(designname='app', viewname='not_run', include_docs=True)

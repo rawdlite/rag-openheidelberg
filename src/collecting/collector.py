@@ -1,10 +1,11 @@
-import couchdb2
+from couchdbclient import Client
 from config import Config
 
 class Collector:
 
     def __init__(self)-> None:
-        self.config = Config()
+        self.config = Config().get('collector')
+        self.client = Client()
 
 
     def get_assets(self) -> list:
@@ -14,4 +15,5 @@ class Collector:
         return doc
 
     def save_asset(self, doc: dict) -> dict:
+        self.client.db.put(doc)
         return doc
