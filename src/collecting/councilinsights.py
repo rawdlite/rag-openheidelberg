@@ -1,7 +1,7 @@
-from .collector import Collector
+from collecting.collector import Collector
 from config import Config
 
-class CounsilInsights(Collector):
+class CouncilInsights(Collector):
 
     def __init__(self):
         super().__init__()
@@ -13,15 +13,22 @@ class CounsilInsights(Collector):
 
 
     def process(self):
-        #TODO: get highest ID from DB and set
+        #TODO: get highest ID from DB and set start_id
         for id in range(self.start_id, self.end_id):
             url = f"{self.base_url}?id={id}&type=do"
             asset = {
-                    'id': id,
-                    'retrieval': {
-	                    'url': url,
-	                    'last_run': None,
-	                    'status': 200
-                        }
+                'id': id,
+                'retrieval': {
+                    'url': url,
+                    'last_run': None,
+                    'status': None
+                    }
 	        }
             self.save_asset(asset)
+
+def main():
+    insights = CouncilInsights()
+    insights.process()
+    
+if __name__ == '__main__':
+    main()

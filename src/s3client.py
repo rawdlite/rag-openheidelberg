@@ -1,5 +1,6 @@
 import boto3
 import os
+import io
 from config import Config
 
 class S3Client:
@@ -21,7 +22,7 @@ class S3Client:
         self.db.upload_file(file_path, file_name)
         
     def save_stream(self, data, key):
-        self.db.upload_fileobj(data, key)
+        self.db.upload_fileobj(io.BytesIO(data), key)
         
     def get_asset(self, key: str):
         self.client.get_object(

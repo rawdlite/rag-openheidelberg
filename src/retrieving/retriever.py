@@ -62,7 +62,7 @@ class Retriever:
             
     def transform(self, asset: dict) -> dict:
         url = asset.get('retrieval', {}).get('url')
-        key = asset.get('id')
+        key = f"{asset.get('id')}.pdf"
         now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
         storage = False
         if url and url.startswith('file'):
@@ -92,7 +92,10 @@ class Retriever:
         
     def save_asset(self, asset):
         self.client.db.put(asset)
-        
-        
+
+def main():
+    retriever = Retriever()
+    retriever.process()
     
-        
+if __name__ == '__main__':
+    main()

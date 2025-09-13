@@ -1,15 +1,15 @@
 import unittest
 
 
-class TestCounsilInsights(unittest.TestCase):
+class TestCouncilInsights(unittest.TestCase):
     
     def setUp(self):
-        from collecting.councilinsights import CounsilInsights
+        from collecting.councilinsights import CouncilInsights
         # Initialize client with real config
-        self.insights = CounsilInsights()
+        self.insights = CouncilInsights()
 
     def test_init(self):
-        # Initialize CounsilInsights with real config
+        # Initialize CouncilInsights with real config
         self.assertIsInstance(self.insights.start_id, int)
         self.assertIsInstance(self.insights.end_id, int)  
         self.assertIsInstance(self.insights.base_url, str)
