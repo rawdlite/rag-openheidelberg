@@ -12,3 +12,5 @@ class TestS3Client(unittest.TestCase):
         self.s3client.save_asset(file_path)
         self.assertTrue(True)
         
+    
+        

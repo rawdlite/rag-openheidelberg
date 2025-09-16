@@ -49,8 +49,21 @@ class Client:
         """
         return self.db.view(designname='app', viewname='all_entries', include_docs=True)
     
-    def get_all_unrun_docs(self) -> List[Dict[str, Any]]:
+    def get_all_unrun_docs(self,limit: int = None,skip: int = None) -> List[Dict[str, Any]]:
         """
         Fetch all documents from couchdb that are not run yet
         """
-        return self.db.view(designname='app', viewname='not_run', include_docs=True)
+        return self.db.view(designname='app', viewname='not_run', include_docs=True, limit=limit, skip=skip)
+    
+    def get_all_unconverted_docs(self, limit: int = None, skip: int = None) -> List[Dict[str, Any]]:
+        """
+        Fetch all documents not converted
+
+        Args:
+            limit (int, optional): _description_. Defaults to None.
+            skip (int, optional): _description_. Defaults to None.
+
+        Returns:
+            List[Dict[str, Any]]: _description_
+        """
+        return self.db.view(designname='app', viewname='not_converted', include_docs=True, limit=limit, skip=skip)
