@@ -17,7 +17,7 @@ class CouncilInsights(Collector):
         for id in range(self.start_id, self.end_id):
             url = f"{self.base_url}?id={id}&type=do"
             asset = {
-                'id': id,
+                'id': str(id),
                 'retrieval': {
                     'url': url,
                     'last_run': None,

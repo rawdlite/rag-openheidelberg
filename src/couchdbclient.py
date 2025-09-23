@@ -4,6 +4,46 @@ import os
 from typing import List, Dict, Any, Optional
 
 DEBUG = os.getenv("DEBUG", "0") in ("1", "true", "True")
+VIEWS = {"views": {
+            "all_entries": {
+                "map": '''function (doc) {
+                    if (!doc._id.startsWith('_design/')) { 
+                        emit(doc.id, doc); 
+                        }}'''
+            },
+            'not_run': {
+                "map": '''function (doc) {
+                    if (
+                        doc._id &&
+                        doc._id.indexOf("_design") !== 0 && // exclude design docs
+                        doc.retrieval &&
+                        doc.retrieval.last_run === null
+                    ) {
+                    emit(doc._id, null);
+                    }
+                }'''
+            },
+            'not_converted': {
+                "map": '''function (doc) {
+                    var noMD =
+                        doc.storage &&
+                        doc.storage.pdf && 
+                        typeof doc.storage.md === "undefined";
+                    var mdEmptyPath =
+                        doc.storage &&
+                        doc.storage.md &&
+                        (
+                            doc.storage.md.path === "" ||
+                            doc.storage.md.path === null ||
+                            typeof doc.storage.md.path === "undefined"
+                        );
+
+                    if (noMD || mdEmptyPath) {
+                        emit(doc._id, null);
+                    }}'''
+            }
+        }
+}
 
 class Client:
     """
@@ -67,3 +107,6 @@ class Client:
             List[Dict[str, Any]]: _description_
         """
         return self.db.view(designname='app', viewname='not_converted', include_docs=True, limit=limit, skip=skip)
+
+    def create_views(self):
+        self.db.put_design('app', VIEWS)

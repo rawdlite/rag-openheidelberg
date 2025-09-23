@@ -8,9 +8,9 @@ class Converter:
     def __init__(self):
         self.config = Config().get('collector')
         self.client = Client()
-        s3_client = S3Client()
-        self.s3_resource = s3_client.s3
-        self.s3_bucket = s3_client.db
+        self.s3_client = S3Client()
+        self.s3_resource = self.s3_client.s3
+        self.s3_bucket = self.s3_client.db
         
     def get_assets(self) -> list:
         assets = self.client.get_all_unconverted_docs()

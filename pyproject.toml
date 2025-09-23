@@ -7,6 +7,7 @@ dependencies = [
     "couchdb2>=1.13.0",
     "dagster==1.11.9",
     "datetime>=5.5",
+    "docling>=2.52.0",
     "requests>=2.32.5",
 ]
 

@@ -41,7 +41,7 @@ class S3Client:
                     'msg': "pdf_path not found"
             }
         pdf_path_parts = pdf_path.split('/')
-        if pdf_path_parts[0] != 's3':
+        if pdf_path_parts[0] != 's3:':
             return {'status': 'error',
                     'msg': "S3 supported by this method"
                     }
@@ -49,7 +49,7 @@ class S3Client:
         bucket_name = pdf_path_parts[-2]
         pdf_content = io.BytesIO()
         # Use bucket name in case path is referencing a bucket other than configurerd one
-        self.s3.Bucket(bucket_name).download_fileobj(key=key,Fileobj=pdf_content)
+        self.s3.Bucket(bucket_name).download_fileobj(Key=key,Fileobj=pdf_content)
         return {'status': 'ok',
                 'pdf_content': pdf_content
         }

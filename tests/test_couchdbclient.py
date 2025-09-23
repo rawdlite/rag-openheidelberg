@@ -25,5 +25,8 @@ class TestCouchDBClient(unittest.TestCase):
         result = self.client.get_all_unconverted_docs(limit=limit,skip=skip)
         self.assertEqual(len(result),limit)
 
+    def test_create_view(self):
+        self.client.create_views()
+
 if __name__ == "__main__":
     unittest.main()

@@ -25,7 +25,7 @@ class FileScanner(Collector):
     
     def transform(self, asset: dict) -> dict:
         doc = {
-            'id': asset.name,
+            'id': os.path.splitext(asset.name)[0],
             'retrieval': {
                 'url': f"file://{asset.path}",
                 'last_run': None,
