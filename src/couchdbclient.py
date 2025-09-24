@@ -114,5 +114,12 @@ class Client:
         """
         return self.db.view(designname='app', viewname='not_converted', include_docs=True, limit=limit, skip=skip)
 
+    def get_all_docs_without_meta(self,limit: int = None,skip: int = None) -> List[Dict[str, Any]]:
+        """
+        Fetch all documents from couchdb that are not run yet
+        """
+        return self.db.view(designname='app', viewname='not_meta', include_docs=True, limit=limit, skip=skip)
+    
+    
     def create_views(self):
         self.db.put_design('app', VIEWS)

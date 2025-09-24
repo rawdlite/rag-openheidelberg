@@ -13,7 +13,7 @@ class Categorizer:
         self.s3_bucket = self.s3_client.db
         
     def get_assets(self) -> list:
-        assets = self.client.get_all_pdfs()
+        assets = self.client.get_all_docs_without_meta()
         return [asset.doc for asset in assets]
     
     def save_asset(self, asset):
