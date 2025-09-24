@@ -39,6 +39,7 @@ class DoclingConverter(Converter):
         Returns:
             dict: _description_
         """
+        print(f"Processing asset {asset['_id']}")
         response = self.s3_client.get_pdf(asset)
 
         if not response.get('status') == 'ok':
