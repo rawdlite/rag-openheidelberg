@@ -2793,6 +2793,18 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/5d/ab/34ec41718af73c00119d0351b7a2531d2ebddb51833a36448fc7b862be60/pylatexenc-2.10.tar.gz", hash = "sha256:3dd8fd84eb46dc30bee1e23eaab8d8fb5a7f507347b23e5f38ad9675c84f40d3", size = 162597, upload-time = "2021-04-06T07:56:07.854Z" }
 
 [[package]]
+name = "pypdf"
+version = "6.1.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "typing-extensions", marker = "python_full_version < '3.11'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/0b/ac/44d86f16b8ad9b42ea1da4b9aa145be71c89927566d9be87fe74bda1dfef/pypdf-6.1.0.tar.gz", hash = "sha256:0cba440d024da5a2a9304f03cd645346052827b84c5a461c6123e24ed5a3b0b9", size = 5072609, upload-time = "2025-09-21T13:38:39.1Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/07/f3/4939b609cfd374e495450b22a0385ee3f531e9aa40e8812e5c405f030c54/pypdf-6.1.0-py3-none-any.whl", hash = "sha256:6b34e4147df20978bf270af19826692e0485431a9d3944617b9533bc77efb695", size = 322468, upload-time = "2025-09-21T13:38:37.467Z" },
+]
+
+[[package]]
 name = "pypdfium2"
 version = "4.30.0"
 source = { registry = "https://pypi.org/simple" }
@@ -3087,6 +3099,7 @@ dependencies = [
     { name = "dagster" },
     { name = "datetime" },
     { name = "docling" },
+    { name = "pypdf" },
     { name = "requests" },
 ]
 
@@ -3103,6 +3116,7 @@ requires-dist = [
     { name = "dagster", specifier = "==1.11.9" },
     { name = "datetime", specifier = ">=5.5" },
     { name = "docling", specifier = ">=2.52.0" },
+    { name = "pypdf", specifier = ">=6.1.0" },
     { name = "requests", specifier = ">=2.32.5" },
 ]
 
