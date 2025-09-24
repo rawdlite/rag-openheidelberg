@@ -57,7 +57,7 @@ class DoclingConverter(Converter):
             key = f"{asset['id']}.md"
             now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             self.s3_client.save_stream(data=markdown,key=key)
-            asset['storage']['md'] = {'path': "s3://{self.s3_bucket._name}/{key}",
+            asset['storage']['md'] = {'path': f"s3://{self.s3_bucket._name}/{key}",
                                       'created_at': now}
             return asset
 
