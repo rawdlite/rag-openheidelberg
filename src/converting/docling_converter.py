@@ -46,16 +46,21 @@ class DoclingConverter(Converter):
             return asset
         else:
             pdf_content = response.get('pdf_content')
+            now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
             source = DocumentStream(name=f"{asset['id']}.pdf", stream=pdf_content)
             doc_converter = DocumentConverter(
                 format_options={
                     InputFormat.PDF: PdfFormatOption(pipeline_options=self.pipeline_options)
                 }
             )
-            conv_result = doc_converter.convert(source)
+            try:
+                conv_result = doc_converter.convert(source)
+            except Exception as e:
+                asset['storage']['md'] = {'error': str(e), 'created_at': now}
+                return asset
             markdown = conv_result.document.export_to_markdown()
             key = f"{asset['id']}.md"
-            now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            
             self.s3_client.save_stream(data=markdown,key=key)
             asset['storage']['md'] = {'path': f"s3://{self.s3_bucket._name}/{key}",
                                       'created_at': now}
