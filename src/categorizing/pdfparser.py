@@ -32,7 +32,7 @@ class PDFParser(Categorizer):
             pdf_content = response.get('pdf_content')
             reader = PdfReader(pdf_content)
             if reader.metadata:
-                asset['metadata'] = {k[1:]: v for k, v in reader.metadata.items() if v}
+                asset['metadata'] = {k[1:]: v for k, v in reader.metadata.items() if type(v).__name__ == 'TextStringObject'}
             return asset
         
 def main():
