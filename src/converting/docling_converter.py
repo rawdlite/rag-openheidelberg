@@ -1,4 +1,4 @@
-import io
+import datetime
 from converting.converter import Converter
 from docling.datamodel.base_models import InputFormat, DocumentStream
 from docling.document_converter import DocumentConverter, PdfFormatOption
@@ -7,6 +7,7 @@ from docling.datamodel.pipeline_options import (
     AcceleratorOptions,
     PdfPipelineOptions,
 )
+
 
 class DoclingConverter(Converter):
     
@@ -45,7 +46,7 @@ class DoclingConverter(Converter):
             return asset
         else:
             pdf_content = response.get('pdf_content')
-            source = DocumentStream(name=asset['id'], stream=pdf_content)
+            source = DocumentStream(name=f"{asset['id']}.pdf", stream=pdf_content)
             doc_converter = DocumentConverter(
                 format_options={
                     InputFormat.PDF: PdfFormatOption(pipeline_options=self.pipeline_options)
@@ -53,4 +54,16 @@ class DoclingConverter(Converter):
             )
             conv_result = doc_converter.convert(source)
             markdown = conv_result.document.export_to_markdown()
-            self.s3.save_stream(data=markdown,key=asset['id'].replace('.pdf','.md') )
+            key = f"{asset['id']}.md"
+            now = datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            self.s3_client.save_stream(data=markdown,key=key)
+            asset['storage']['md'] = {'path': "s3://{self.s3_bucket._name}/{key}",
+                                      'created_at': now}
+            return asset
+
+def main():
+    converter = DoclingConverter()
+    converter.process()
+    
+if __name__ == '__main__':
+    main()
