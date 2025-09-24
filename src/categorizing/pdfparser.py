@@ -1,4 +1,4 @@
-from categorizing import Categorizer
+from categorizing.categorizer import Categorizer
 from pypdf import PdfReader
 
 class PDFParser(Categorizer):
@@ -34,3 +34,10 @@ class PDFParser(Categorizer):
             if reader.metadata:
                 asset['metadata'] = {k[1:]: v for k, v in reader.metadata.items()}
             return asset
+        
+def main():
+    parser = PDFParser()
+    parser.process()
+
+if __name__ == '__main__':
+    main()

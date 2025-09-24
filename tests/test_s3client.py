@@ -7,9 +7,9 @@ class TestS3Client(unittest.TestCase):
         # Initialize client with real config
         self.s3client = S3Client()
         
-    def test_save_asset(self):
+    def test_save_local_file(self):
         file_path = "/Users/tom/Gebratener Spinat.pdf"
-        self.s3client.save_asset(file_path)
+        self.s3client.save_local_file(file_path)
         self.assertTrue(True)
         
     
